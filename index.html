@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Node.js - en introduksjon</title>
+
+
+    <meta name="author" content="Ditt navn her">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="reveal/css/reveal.min.css">
+    <link rel="stylesheet" href="reveal/css/theme/beige.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="/reveal/lib/css/zenburn.css">
+
+    <link rel="stylesheet" href="reveal/css/test.css">
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write( '<link rel="stylesheet" href="reveal/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal/lib/js/html5shiv.js"></script>
+	<![endif]-->
+
+    <style type="text/css">
+        .no-uppercase {text-transform: none !important;}
+    </style>
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section data-state="bouvet-slide">
+      		<img src="./img/nodejs.jpg">  
+      		<p>Svein Arild Myhrer / Bouvet Arendal</p>
+        </section>
+        
+        <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/guru.jpg">       
+            </div>
+        </section>
+  
+        
+        <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/enthusiast.jpg">
+            </div>
+        </section>
+
+        <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/ryandahl.jpg">
+            	<p>Ryan Dahl</p>
+            	<h2 class="fragment">"I/O has to be done differently"</h2>
+            </div>
+        </section>
+
+      	<section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/memory_usage.png">
+            </div>
+        </section>
+
+       	<section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<h2>The notion of non-blocking I/O</h2>
+        		<ul>
+					<li class="fragment">Single threaded</li>  
+					<li class="fragment">Event driven</li> 
+					<li class="fragment">Event loop</li>					    			
+        		</ul>
+            </div>
+        </section>
+
+        <section data-state="bouvet-slide" data-transition="none">
+            <div>            	
+<div class="">
+            	<h3>Blocking I/O</h3>
+  	       		<pre><code>var result = db.query('select..');
+//ZZZZZZZzzzZZ
+processResult(result);
+doOtherOperation();
+</code></pre>
+</div>
+<div class="fragment">
+ 	<h3>Non-blocking I/O</h3>
+  	       		<pre><code>db.query('select..', function(result){
+	//do something with result
+});
+doOtherOperation();
+</code></pre>
+</div>
+            </div>
+        </section>
+
+
+  
+
+        <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/javascript.jpg">
+                <p>JavaScript? Why?</p>
+            </div>
+        </section>
+
+
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/nodejs.jpg">
+                <p>"To provide a purely evented, non-blocking infrastructure to script highly concurrent programs"</p>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/nodejs-small.png">
+            	<h2>Design goals</h2>
+        		<ul>
+					<li class="fragment">Use of callbacks for all I/O</li>  
+					<li class="fragment">Support for the most important network protocols; TCP, DNS, HTTP</li> 
+					<li class="fragment">Familiar for client side JS-programmers and old school Unix-hackers (POSIX)</li> 
+					<li class="fragment">Platform independent</li>       			
+        		</ul>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img width="400px" src="./img/node-architecture.png">
+                <p>"A bunch of c libraries hacked together"</p>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img src="./img/attention.jpg">
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img style="border: 1px solid black !important" src="./img/npm.png">
+             	<p>http://npmjs.org/</p>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+                <img width="700" src="./img/npmstats.png">
+            </div>
+        </section>
+
+       	<section data-state="bouvet-slide" data-transition="none">
+	       	<div>
+	       		<p>helloworld/package.json</p>
+	       		<pre><code>
+{
+  "name": "helloworld",
+  "version": "0.0.0",
+  "description": "hello world node module",
+  "main": "index.js",
+  "dependencies": {
+  	"underscore": "1.7.0"
+  },
+  "author": "Svein Arild Myhrer",
+  "license": "ISC"
+}
+
+	            </code></pre> 
+	       		<pre><code>
+>> npm install
+	            </code></pre>
+	       		<pre><code>
+>> npm -g install
+	            </code></pre> 
+
+	        </div>
+        </section>
+
+       	<section data-state="bouvet-slide" data-transition="none">
+	       	<div>
+	       		<p>helloworld/index.js</p>
+	       		<pre><code>
+function helloWorld(){
+	console.log("Hello world")	
+}
+module.exports = helloWorld;
+	            </code></pre>
+	        </div>
+        </section>
+
+       	<section data-state="bouvet-slide" data-transition="none">
+	       	<div>
+	       		<p>some-other-module.js</p>
+	       		<pre><code>
+var hw = require('helloworld');
+hw();
+	            </code></pre>
+	        </div>
+        </section>
+
+       	<section data-state="bouvet-slide" data-transition="none">
+	       	<div>
+	       		<p>Valid node.js package</p>
+	       		<pre><code>
+
+&lt;package-name&gt;
+- package.json
+- index.js
+	            </code></pre>
+	        </div>
+        </section>
+
+       	<section data-state="bouvet-slide" data-transition="none">
+	       	<div>
+	       	<h2>Streams</h2>
+    <img style="border: 1px solid black !important" src="./img/stream.jpg">
+	        </div>
+        </section>
+
+       	<section data-state="bouvet-slide" data-transition="none">
+	       	<div>
+	       		<h2>Unix pipes : Node.js Streams</h2>
+	       		<pre><code>
+>> ls -al | sort -r -k 5 | head -10
+	            </code></pre>
+	        </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<h2>Streams</h2>
+            	<img width="700" src="./img/stream-read-write.png">
+                <p>(read, write, duplex, transform, passthrough)</p>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+             	<h2>Stream example</h2>
+	       		<pre><code>
+var fs = require('fs');
+var zlib = require('zlib');
+
+var r = fs.createReadStream('file.txt');
+var z = zlib.createGzip();
+var w = fs.createWriteStream('file.txt.gz');
+r.pipe(z).pipe(w);
+	            </code></pre>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<img width="700" src="./img/whatelse.jpg">
+            	<p>What Else Is There?</p>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+             	<h2>HTTP hello world</h2>
+	       		<pre><code>
+var http = require('http');
+var server = http.createServer(function (request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello World\n");
+});
+server.listen(8000);
+	            </code></pre>
+             	<h2>TCP hello world</h2>
+	       		<pre><code>
+var net = require('net');
+var server = net.createServer(function (socket) {
+  socket.end("Hello World\n");
+});
+server.listen(7000, "localhost");
+	            </code></pre>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+           		<h2>Web application frameworks</h2>
+	      		<ul>
+	      			<li>Connect</li>  
+					<li>Express</li>
+					<li>Hapi</li>
+					<li>Restify</li>  
+					<li>Meteor</li>  
+					<li>.... +++</li>  
+        		</ul>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<h2>Frontend development tools</h2>
+            	<p style="color: grey">css preprocessors, css minification and concatination, javascript minification and concationation, linting, test runners, reporters, etc.</p>
+            	<div class="fragment">
+            		<img width="300px" style="float: left" src="./img/grunt-logo.png">        
+    				<img width="535px" style="float: right" src="./img/gulp-js.jpg">       	
+    			</div>
+		       	<div class="fragment">
+            		<img src="./img/yeoman-logo.png">           	
+    			</div>
+            </div>
+        </section>
+
+       <section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<img src="./img/tessel-logo.png">
+				<p class="fragment">A microcontroller that runs JavaScript</p>
+				<p class="fragment">and is Node.js compatible</p>
+            </div>
+        </section>
+
+          <section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<img src="./img/tessel-card.jpg">
+				<p class="">https://tessel.io</p>
+            </div>
+        </section>
+
+      <section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<img src="./img/tessel-modules.png">
+				<p class="">https://tessel.io</p>
+            </div>
+        </section>
+
+      <section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<h2>Node.js in the Enterprise</h2>
+            	<img width="500px" class="fragment" src="./img/paypal.png">
+	  			<img width="400px" class="fragment" src="./img/walmart.jpg">
+ 				<img class="fragment" src="./img/yahoo.jpg">
+ 				<img width="200px" class="fragment" src="./img/linkedin.png">
+				<img class="fragment" src="./img/groupon.jpg">
+            </div>
+        </section>
+
+
+      	<section data-state="bouvet-slide" data-transition="none">
+            <div>
+            	<div class="">
+	            	<h2>How to Node?</h2>
+		      		<ul>
+	      				<li>http://nodejs.org/</li> 
+		      			<li>http://nodeschools.io</li>  
+	    				<li>books</li>  
+						<li>jfgi</li>  
+	        		</ul>
+        		</div>
+        		<br>
+   				<div class="fragment">
+			      	<h2>How to serve Node?</h2>
+		      		<ul>
+	      				<li>Windows Azure</li> 
+		      			<li>Nodejitsu</li>  
+	    				<li>Heroku</li>  
+						<li>VPS providers</li>
+						<li>+++</li>  
+	        		</ul>
+        		</div>
+        </section>
+
+      <section data-state="bouvet-slide" data-transition="none">
+            <div>
+        		<p>?</p>
+		    </div>
+        </section>
+
+        <section data-state="bouvet-slide">
+            <h2>Takk for meg</h2>
+        </section>
+        
+        
+    </div>
+</div>
+
+<script src="reveal/lib/js/head.min.js"></script>
+<script src="reveal/js/reveal.min.js"></script>
+
+<script>
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: '/reveal/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: '/reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: '/reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
